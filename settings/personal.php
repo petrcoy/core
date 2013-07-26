@@ -80,6 +80,7 @@ $tmpl->assign('activelanguage', $userLang);
 $tmpl->assign('passwordChangeSupported', OC_User::canUserChangePassword(OC_User::getUser()));
 $tmpl->assign('displayNameChangeSupported', OC_User::canUserChangeDisplayName(OC_User::getUser()));
 $tmpl->assign('displayName', OC_User::getDisplayName());
+$tmpl->assign('avatar', OC_Config::getValue('avatar', 'local'));
 
 $forms=OC_App::getForms('personal');
 $tmpl->assign('forms', array());
