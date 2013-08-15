@@ -135,6 +135,10 @@ $(document).ready(function(){
 		}
 	};
 
+	$('#uploadavatarbutton').click(function(){
+		$('#uploadavatar').click();
+	});
+
 	$('#uploadavatar').fileupload(uploadparms);
 
 	$('#selectavatar').click(function(){
