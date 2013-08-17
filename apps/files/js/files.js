@@ -600,14 +600,6 @@ function boolOperationFinished(data, callback) {
 	}
 }
 
-function updateBreadcrumb(breadcrumbHtml) {
-    var $controls = $('#controls');
-    $controls.find('.crumb').remove();
-    $controls.prepend(breadcrumbHtml);
-    // TODO: need to move that method out
-	//resizeBreadcrumbs(true);
-}
-
 var createDragShadow = function(event){
 	//select dragged file
 	var isDragSelected = $(event.target).parents('tr').find('td input:first').prop('checked');

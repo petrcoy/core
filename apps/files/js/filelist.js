@@ -146,7 +146,7 @@ var FileList={
     changeDirectory: function(targetDir, changeUrl){
         var $dir = $('#dir'),
             url,
-            currentDir = $dir.val();
+            currentDir = $dir.val() || '/';
         if (currentDir === targetDir){
             return;
         }
@@ -173,7 +173,11 @@ var FileList={
                 }
 
                 if(typeof(result.data.breadcrumb) != 'undefined'){
-                    updateBreadcrumb(result.data.breadcrumb);
+                    var $controls = $('#controls');
+                    $controls.find('.crumb').remove();
+                    $controls.prepend(result.data.breadcrumb);
+                    // TODO: might need refactor breadcrumb code into a new file
+                    //resizeBreadcrumbs(true);
                 }
 		        FileList.update(result.data.files);
                 // TODO remove mask

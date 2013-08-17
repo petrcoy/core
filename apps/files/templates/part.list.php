@@ -1,8 +1,3 @@
-<?php
-/*
-TODO: investigate this: <input type="hidden" id="disableSharing" data-status="<?php p($_['disableSharing']); ?>">
- */
-?>
 <?php $totalfiles = 0;
 $totaldirs = 0;
 $totalsize = 0; ?>

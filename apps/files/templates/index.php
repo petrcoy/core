@@ -57,6 +57,8 @@
 
 <div id="emptyfolder" <?php if (!isset($_['files']) or !$_['isCreatable'] or count($_['files']) > 0):?>class="hidden"<?php endif; ?>><?php p($l->t('Nothing in here. Upload something!'))?></div>
 
+<input type="hidden" id="disableSharing" data-status="<?php p($_['disableSharing']); ?>"></input>
+
 <table id="filestable" data-allow-public-upload="<?php p($_['publicUploadEnabled'])?>">
 	<thead>
 		<tr>

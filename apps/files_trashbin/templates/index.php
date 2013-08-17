@@ -9,6 +9,8 @@
 	<div id="emptyfolder"><?php p($l->t('Nothing in here. Your trash bin is empty!'))?></div>
 <?php endif; ?>
 
+<input type="hidden" id="disableSharing" data-status="<?php p($_['disableSharing']); ?>"></input>
+
 <table id="filestable">
 	<thead>
 		<tr>

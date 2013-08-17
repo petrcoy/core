@@ -34,7 +34,6 @@ $list = new OCP\Template( "files", "part.list", "" );
 $list->assign( "files", $files, false );
 $list->assign( "baseURL", $baseUrl, false );
 $list->assign('downloadURL', OCP\Util::linkToRoute('download', array('file' => '/')));
-$list->assign('disableSharing', false);
 $data['files'] = $list->fetchPage();
 
 OCP\JSON::success(array('data' => $data));

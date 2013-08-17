@@ -171,7 +171,10 @@ $(document).ready(function() {
 		}
 	});
 
-	FileActions.actions.dir = {};
+	FileActions.actions.dir = {
+        // only keep 'Open' action for navigation
+        'Open': FileActions.actions.dir.Open
+    };
 });
 
 function processSelection(){

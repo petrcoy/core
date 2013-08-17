@@ -105,7 +105,6 @@ $list->assign('files', $files);
 $encodedDir = \OCP\Util::encodePath($dir);
 $list->assign('baseURL', OCP\Util::linkTo('files_trashbin', 'index.php'). '?dir='.$encodedDir);
 $list->assign('downloadURL', OCP\Util::linkTo('files_trashbin', 'download.php') . '?file='.$encodedDir);
-$list->assign('disableSharing', true);
 $list->assign('dirlisting', $dirlisting);
 $list->assign('disableDownloadActions', true);
 
@@ -114,5 +113,6 @@ $tmpl->assign('breadcrumb', $breadcrumbNav->fetchPage());
 $tmpl->assign('fileList', $list->fetchPage());
 $tmpl->assign('files', $files);
 $tmpl->assign('dir', \OC\Files\Filesystem::normalizePath($view->getAbsolutePath()));
+$tmpl->assign('disableSharing', true);
 
 $tmpl->printPage();
