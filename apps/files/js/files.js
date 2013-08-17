@@ -517,6 +517,9 @@ $(document).ready(function() {
 
 	resizeBreadcrumbs(true);
 
+    // event handlers for breadcrumb items
+    $('#controls').delegate('.crumb a', 'click', onClickBreadcrumb);
+
 	// display storage warnings
 	setTimeout ( "Files.displayStorageWarnings()", 100 );
 	OC.Notification.setDefault(Files.displayStorageWarnings);
@@ -598,7 +601,11 @@ function boolOperationFinished(data, callback) {
 }
 
 function updateBreadcrumb(breadcrumbHtml) {
-	$('p.nav').empty().html(breadcrumbHtml);
+    var $controls = $('#controls');
+    $controls.find('.crumb').remove();
+    $controls.prepend(breadcrumbHtml);
+    // TODO: need to move that method out
+	//resizeBreadcrumbs(true);
 }
 
 var createDragShadow = function(event){
@@ -844,4 +851,10 @@ function checkTrashStatus() {
 			$("input[type=button][id=trash]").removeAttr("disabled");
 		}
 	});
+}
+
+function onClickBreadcrumb(e){
+    var $el = $(e.target).closest('.crumb');
+    e.preventDefault();
+    FileList.changeDirectory(decodeURIComponent($el.data('dir')));
 }

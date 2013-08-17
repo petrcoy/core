@@ -55,9 +55,7 @@
 	<input type="hidden" name="permissions" value="<?php p($_['permissions']); ?>" id="permissions">
 </div>
 
-<?php if (isset($_['files']) and $_['isCreatable'] and count($_['files'])==0):?>
-	<div id="emptyfolder"><?php p($l->t('Nothing in here. Upload something!'))?></div>
-<?php endif; ?>
+<div id="emptyfolder" <?php if (!isset($_['files']) or !$_['isCreatable'] or count($_['files']) > 0):?>class="hidden"<?php endif; ?>><?php p($l->t('Nothing in here. Upload something!'))?></div>
 
 <table id="filestable" data-allow-public-upload="<?php p($_['publicUploadEnabled'])?>">
 	<thead>
