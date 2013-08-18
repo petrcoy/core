@@ -150,12 +150,16 @@ var FileList={
         if (currentDir === targetDir){
             return;
         }
+        FileList.setCurrentDir(targetDir, changeUrl);
+        FileList.reload();
+    },
+    setCurrentDir: function(targetDir, changeUrl){
         $('#dir').val(targetDir);
+        // Note: IE8 handling ignored for now
         if (window.history.pushState && changeUrl !== false){
 			url = OC.linkTo('files', 'index.php')+"?dir="+ encodeURIComponent(targetDir).replace(/%2F/g, '/'),
             window.history.pushState({dir: targetDir}, '', url);
         }
-        FileList.reload();
     },
     reload: function(){
         $.ajax({
@@ -165,24 +169,27 @@ var FileList={
                 breadcrumb: true
             },
             success: function(result) {
-                var $list,
-                    $controls = $('#controls');
-                if (!result || result.status === 'error') {
-                    OC.Notification.show(result.data.message);
-                    return;
-                }
-
-                if(typeof(result.data.breadcrumb) != 'undefined'){
-                    var $controls = $('#controls');
-                    $controls.find('.crumb').remove();
-                    $controls.prepend(result.data.breadcrumb);
-                    // TODO: might need refactor breadcrumb code into a new file
-                    //resizeBreadcrumbs(true);
-                }
-		        FileList.update(result.data.files);
-                // TODO remove mask
+                FileList.reloadCallback(result);
             }
         });
+    },
+    reloadCallback: function(result){
+        var $list,
+            $controls = $('#controls');
+        if (!result || result.status === 'error') {
+            OC.Notification.show(result.data.message);
+            return;
+        }
+
+        if(typeof(result.data.breadcrumb) != 'undefined'){
+            var $controls = $('#controls');
+            $controls.find('.crumb').remove();
+            $controls.prepend(result.data.breadcrumb);
+            // TODO: might need refactor breadcrumb code into a new file
+            //resizeBreadcrumbs(true);
+        }
+        FileList.update(result.data.files);
+        // TODO remove mask
     },
 	remove:function(name){
 		$('tr').filterAttr('data-file',name).find('td.filename').draggable('destroy');
@@ -654,11 +661,10 @@ $(document).ready(function(){
         }
         else{
             // read from URL
-            targetDir = (OC.parseQueryString(location.search) || {dir: '/'}).dir;
+            targetDir = (OC.parseQueryString(location.search) || {dir: '/'}).dir || '/';
         }
         if (targetDir){
             FileList.changeDirectory(targetDir, false);
         }
     }
 });
-

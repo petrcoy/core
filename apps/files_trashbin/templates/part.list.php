@@ -11,7 +11,7 @@
 		data-permissions='<?php p($file['permissions']); ?>'
 		<?php if ( $_['dirlisting'] ): ?>
 		id="<?php p($file['directory'].'/'.$file['name']);?>"
-		data-file="<?php p($file['directory'].'/'.$file['name']);?>"
+		data-file="<?php p($name);?>"
 		data-timestamp=''
 		data-dirlisting=1
 		<?php  else: ?>

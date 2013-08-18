@@ -169,6 +169,9 @@ $(document).ready(function() {
 				action(filename);
 			}
 		}
+
+        // event handlers for breadcrumb items
+        $('#controls').delegate('.crumb:not(.home) a', 'click', onClickBreadcrumb);
 	});
 
 	FileActions.actions.dir = {
@@ -247,3 +250,9 @@ function disableActions() {
 	$(".action").css("display", "none");
 	$(":input:checkbox").css("display", "none");
 }
+function onClickBreadcrumb(e){
+    var $el = $(e.target).closest('.crumb');
+    e.preventDefault();
+    FileList.changeDirectory(decodeURIComponent($el.data('dir')));
+}
+
